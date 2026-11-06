@@ -5,7 +5,7 @@ description: 打开、连接或操作 Infinite Canvas 画布；未连接时启�
 
 # 打开、连接和操作画布
 
-本插件只在本机启动连接器，不部署画布。画布、数据、生成任务和算力点都在用户当前登录的 `studio.massmore.org` 或 `canvas.linkfoai.com` 页面；画布操作使用插件 MCP 提供的现有工具。连接器包固定为 `github:Laurenceli13/infinite-canvas-connector#v0.1.4`。
+本插件只在本机启动连接器，不部署画布。画布、数据、生成任务和算力点都在用户当前登录的 `studio.massmore.org` 或 `canvas.linkfoai.com` 页面；画布操作使用插件 MCP 提供的现有工具。连接器包固定为 `github:Laurenceli13/infinite-canvas-connector#v0.1.5`。
 
 - 已连接且目标画布已确认时，直接操作，跳过下方连接流程；首次连接、目标改变或连接失效时再确认目标。
 - 直接调用当前对话提供的画布 MCP 工具，不编写临时脚本另建 MCP 客户端。工具缺失时定位插件加载状态和启动错误，不以脚本调用成功代替插件工具加载成功。
@@ -21,10 +21,10 @@ Windows 启动权限：执行第 3 步后台服务或第 5 步浏览器打开命
 会话禁止申请权限、用户拒绝或自动审批拒绝时，停止对应启动，明确说明被拒绝的操作和原因；不修改权限策略、不换工具绕过拒绝，也不默认转成让用户在 PowerShell 手动执行。用户主动选择手动方式时再提供命令。
 
 1. 只接受 `https://studio.massmore.org/canvas/[id]` 或 `https://canvas.linkfoai.com/canvas/[id]`。优先使用用户已经给出的画布 URL 和已观察到的原画布标签，不重复索取地址。连接已有画布时保留原浏览器环境，不先在内置浏览器打开裸链接。拒绝其他域名和自部署画布，不拼造画布 ID。
-2. 执行 `npx -y github:Laurenceli13/infinite-canvas-connector#v0.1.4 config` 读取 `{url, token, origins}`，并请求其 `GET /config` 判断服务是否已启动。config 不改本机连接配置。HTTP `/config` 只提供 `{url, hasToken}`，不包含 Token；首次尚无本机配置时进入启动步骤。
-3. 服务未运行时，用当前环境提供的后台终端运行 `npx -y github:Laurenceli13/infinite-canvas-connector#v0.1.4`，保持进程存活。Windows 使用 `Start-Process` 时必须带 `-WindowStyle Hidden`。不要安装或发布额外全局包。启动失败或端口属于其他服务时读取错误并停止，不反复启动或结束未知进程。已有服务正常时不要重复启动。
-4. 读取启动输出的 `Local URL`、`Connect token`，或再次执行 `npx -y github:Laurenceli13/infinite-canvas-connector#v0.1.4 config`。Token 保存在当前用户的 `~/.infinite-canvas/codex-agent.json`，无需用户创建 `.env`、生成 Token 或录入网站来源。不要在回复、文档或额外日志中复制 Token 或包含它的完整连接链接。
-5. 原画布标签可控时，用标准 `URL` 和 `URLSearchParams` 保留原链接及其他 fragment 参数，设置 `agentUrl`、`agentToken`，在该标签打开连接链接。原浏览器不可控时，执行 `npx -y github:Laurenceli13/infinite-canvas-connector#v0.1.4 open "<原画布URL>" <浏览器> [浏览器参数...]`，入口会自动带入凭据并打开浏览器，无需读取或输出完整连接链接。浏览器取 `chrome`、`edge`、`firefox`、`brave`；只有已确认原画布使用系统默认浏览器时才用 `default`。使用已确认的原配置文件参数；无法确定原浏览器或配置时只询问缺失的信息，不猜测、不切换内置浏览器。Token 仅写入 fragment，不放普通 query。
+2. 执行 `npx -y github:Laurenceli13/infinite-canvas-connector#v0.1.5 config` 读取 `{url, token, origins}`，并请求其 `GET /config` 判断服务是否已启动。config 不改本机连接配置。HTTP `/config` 只提供 `{url, hasToken}`，不包含 Token；首次尚无本机配置时进入启动步骤。
+3. 服务未运行时，用当前环境提供的后台终端运行 `npx -y github:Laurenceli13/infinite-canvas-connector#v0.1.5`，保持进程存活。Windows 使用 `Start-Process` 时必须带 `-WindowStyle Hidden`。不要安装或发布额外全局包。启动失败或端口属于其他服务时读取错误并停止，不反复启动或结束未知进程。已有服务正常时不要重复启动。
+4. 读取启动输出的 `Local URL`、`Connect token`，或再次执行 `npx -y github:Laurenceli13/infinite-canvas-connector#v0.1.5 config`。Token 保存在当前用户的 `~/.infinite-canvas/codex-agent.json`，无需用户创建 `.env`、生成 Token 或录入网站来源。不要在回复、文档或额外日志中复制 Token 或包含它的完整连接链接。
+5. 原画布标签可控时，用标准 `URL` 和 `URLSearchParams` 保留原链接及其他 fragment 参数，设置 `agentUrl`、`agentToken`，在该标签打开连接链接。原浏览器不可控时，执行 `npx -y github:Laurenceli13/infinite-canvas-connector#v0.1.5 open "<原画布URL>" <浏览器> [浏览器参数...]`，入口会自动带入凭据并打开浏览器，无需读取或输出完整连接链接。浏览器取 `chrome`、`edge`、`firefox`、`brave`；只有已确认原画布使用系统默认浏览器时才用 `default`。使用已确认的原配置文件参数；无法确定原浏览器或配置时只询问缺失的信息，不猜测、不切换内置浏览器。Token 仅写入 fragment，不放普通 query。
 6. 打开命令成功不代表已连接。等待画布 MCP 工具可用，再调用 `get_canvas_summary` 确认目标，成功后继续用户任务；无需能控制系统浏览器标签。网页的本地网络权限提示由用户允许。失败时定位服务、网页连接或原浏览器配置的问题，不转成手填 Token 教程，不用其他画布替代目标。多个画布连接时明确当前目标，不能随意选一个执行。关闭画布标签会断开外部 MCP。
 
 浏览器连接需要与 Agent 在同一台电脑，npm 包下载后仍在本机运行。Codex 未登录时执行 `npx -y @openai/codex@0.159.2 login`，让用户完成登录；不要读取或复制账号凭证。只执行用户请求所需的启动、连接和画布操作。

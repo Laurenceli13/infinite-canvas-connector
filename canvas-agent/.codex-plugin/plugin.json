@@ -1,6 +1,6 @@
 {
   "name": "canvas-agent",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "通过本地 Canvas Agent 读取和操作当前画布。",
   "author": {
     "name": "Infinite Canvas"

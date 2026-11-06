@@ -1,0 +1,29 @@
+{
+    "name": "infinite-canvas-connector",
+    "version": "0.1.5",
+    "type": "module",
+    "bin": {
+        "infinite-canvas-connector": "canvas-agent/index.mjs"
+    },
+    "files": [
+        "canvas-agent/index.mjs",
+        "canvas-agent/codex.mjs",
+        "canvas-agent/access.mjs"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Laurenceli13/infinite-canvas-connector.git"
+    },
+    "engines": {
+        "node": ">=22"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.12.1",
+        "@openai/codex": "0.159.2",
+        "express": "^5.1.0",
+        "open": "^11.0.1"
+    }
+}
